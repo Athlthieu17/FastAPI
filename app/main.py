@@ -9,7 +9,7 @@ import time
 from . import models, schemas, utils
 from sqlalchemy.orm import Session
 from .database import SessionLocal, engine, get_db
-from .routers import post, user
+from .routers import post, user, auth
 
 
 models.Base.metadata.create_all(bind=engine)
@@ -49,7 +49,8 @@ def find_index_post(id):
             return i   
 
 app.include_router(post.router)
-app.include_router(post.user)
+app.include_router(user.router)
+app.include_router(auth.router)
 
 @app.get("/")
 async def root():
